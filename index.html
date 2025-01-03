@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cybersecurity Learning Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000814;
+            color: #e0e0e0;
+        }
+        header {
+            text-align: center;
+            padding: 20px;
+            background: #001d3d;
+            color: white;
+            font-size: 2em;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        section {
+            padding: 20px;
+            margin: 20px;
+            background: #003566;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+        }
+        h2 {
+            color: #ffffff;
+            text-shadow: 2px 2px 5px #000;
+            margin-bottom: 15px;
+        }
+        p {
+            line-height: 1.6;
+        }
+        .chart {
+            text-align: center;
+            margin: 20px 0;
+        }
+        canvas {
+            max-width: 100%;
+        }
+        .quiz {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .quiz input[type="text"], .quiz button {
+            margin: 5px;
+            padding: 10px;
+            font-size: 1em;
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background: #001d3d;
+            color: white;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    Cybersecurity Awareness
+</header>
+
+<section>
+    <h2>Understanding Hackers and Scammers</h2>
+    <p>Hackers and scammers use various techniques to exploit individuals and organizations. Common scams include phishing emails, fake websites, social engineering, and tech support scams. Understanding their methods is the first step in staying safe.</p>
+    <h3>How to Recognize Scams</h3>
+    <ul>
+        <li>Look out for urgent or threatening language.</li>
+        <li>Check for spelling and grammar mistakes in communications.</li>
+        <li>Verify the source of links before clicking.</li>
+    </ul>
+    <h3>How to Avoid Being Scammed</h3>
+    <ul>
+        <li>Use strong, unique passwords.</li>
+        <li>Enable two-factor authentication.</li>
+        <li>Be cautious with unsolicited emails or calls.</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Scam Statistics</h2>
+    <div class="chart">
+        <canvas id="peopleScammedChart"></canvas>
+    </div>
+    <div class="chart">
+        <canvas id="organizationsHackedChart"></canvas>
+    </div>
+</section>
+
+<section>
+    <h2>Test Your Knowledge</h2>
+    <div class="quiz">
+        <p>Solve this puzzle: What is a common type of phishing scam?</p>
+        <input type="text" id="answer" placeholder="Your answer here">
+        <button onclick="checkAnswer()">Submit</button>
+        <p id="result"></p>
+    </div>
+</section>
+
+<footer>
+    Learn, Protect, and Stay Safe
+</footer>
+
+<script>
+    const ctx1 = document.getElementById('peopleScammedChart').getContext('2d');
+    const peopleScammedChart = new Chart(ctx1, {
+        type: 'bar',
+        data: {
+            labels: ['Phishing', 'Vishing', 'Malware', 'Tech Support Scams'],
+            datasets: [{
+                label: '# of People Scammed',
+                data: [200, 150, 120, 90],
+                backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    const ctx2 = document.getElementById('organizationsHackedChart').getContext('2d');
+    const organizationsHackedChart = new Chart(ctx2, {
+        type: 'pie',
+        data: {
+            labels: ['Government', 'Private Companies', 'Non-profits'],
+            datasets: [{
+                data: [40, 35, 25],
+                backgroundColor: ['#0077b6', '#00b4d8', '#90e0ef'],
+            }]
+        },
+        options: {
+            responsive: true
+        }
+    });
+
+    function checkAnswer() {
+        const answer = document.getElementById('answer').value.toLowerCase();
+        const result = document.getElementById('result');
+        if (answer === 'phishing') {
+            result.textContent = 'Correct! Phishing is a common scam.';
+            result.style.color = 'green';
+        } else {
+            result.textContent = 'Try again! Hint: It starts with "P".';
+            result.style.color = 'red';
+        }
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</body>
+</html>
