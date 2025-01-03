@@ -3,164 +3,279 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cybersecurity Learning Page</title>
+    <title>Cybersecurity Awareness Tree</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js CDN -->
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
             margin: 0;
             padding: 0;
-            background-color: #000814;
-            color: #e0e0e0;
         }
+
         header {
             text-align: center;
-            padding: 20px;
-            background: #001d3d;
+            background-color: #2c3e50;
             color: white;
-            font-size: 2em;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
-        }
-        section {
             padding: 20px;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        .tree {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .branch {
             margin: 20px;
-            background: #003566;
+            cursor: pointer;
+            display: inline-block;
+            padding: 20px;
             border-radius: 10px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid #ccc; /* Add border for branches */
         }
-        h2 {
-            color: #ffffff;
-            text-shadow: 2px 2px 5px #000;
-            margin-bottom: 15px;
+
+        /* Cybersecurity-themed colors for sticky notes (not branches) */
+        .sticky-note:nth-child(1) {
+            background-color: #1e3a8a; /* Dark Blue */
         }
-        p {
-            line-height: 1.6;
+
+        .sticky-note:nth-child(2) {
+            background-color: #00ff66; /* Neon Green */
         }
-        .chart {
+
+        .sticky-note:nth-child(3) {
+            background-color: #6a0dad; /* Dark Purple */
+        }
+
+        .sticky-note:nth-child(4) {
+            background-color: #00bcd4; /* Electric Blue */
+        }
+
+        .sticky-note:nth-child(5) {
+            background-color: #00d9ff; /* Bright Cyan */
+        }
+
+        /* Hover effect to make it look alive with glowing shadow */
+        .branch:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.7); /* Glowing effect */
+        }
+
+        .sticky-note {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            width: 200px;
+            height: 150px;
+            border-radius: 10px;
             text-align: center;
-            margin: 20px 0;
+            font-weight: bold;
+            color: white;
+            transition: background-color 0.3s;
         }
-        canvas {
-            max-width: 100%;
+
+        .sticky-note:hover {
+            background-color: #f1c40f;
         }
-        .quiz {
+
+        .content {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .active-content {
+            display: block;
+        }
+
+        footer {
+            margin-top: 20px;
             text-align: center;
+        }
+
+        .back-button {
+            display: inline-block;
+            background-color: #3498db;
+            padding: 10px 20px;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
             margin-top: 20px;
         }
-        .quiz input[type="text"], .quiz button {
-            margin: 5px;
-            padding: 10px;
-            font-size: 1em;
+
+        .back-button:hover {
+            background-color: #2980b9;
         }
-        footer {
-            text-align: center;
-            padding: 10px;
-            background: #001d3d;
-            color: white;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
+
+        /* Style for the chart container */
+        #chart-container {
+            width: 80%;
+            margin: 40px auto;
         }
     </style>
 </head>
 <body>
 
 <header>
-    Cybersecurity Awareness
+    <h1>Cybersecurity Awareness</h1>
 </header>
 
-<section>
-    <h2>Understanding Hackers and Scammers</h2>
-    <p>Hackers and scammers use various techniques to exploit individuals and organizations. Common scams include phishing emails, fake websites, social engineering, and tech support scams. Understanding their methods is the first step in staying safe.</p>
-    <h3>How to Recognize Scams</h3>
-    <ul>
-        <li>Look out for urgent or threatening language.</li>
-        <li>Check for spelling and grammar mistakes in communications.</li>
-        <li>Verify the source of links before clicking.</li>
-    </ul>
-    <h3>How to Avoid Being Scammed</h3>
-    <ul>
-        <li>Use strong, unique passwords.</li>
-        <li>Enable two-factor authentication.</li>
-        <li>Be cautious with unsolicited emails or calls.</li>
-    </ul>
-</section>
+<div class="tree">
+    <div class="branch" onclick="showContent(1)">
+        <div class="sticky-note">Scamming is a pervasive issue</div>
+    </div>
+    <div class="branch" onclick="showContent(2)">
+        <div class="sticky-note">Types of Scams and Scammers</div>
+    </div>
+    <div class="branch" onclick="showContent(3)">
+        <div class="sticky-note">Profiles of Scammers</div>
+    </div>
+    <div class="branch" onclick="showContent(4)">
+        <div class="sticky-note">Global Impact and Statistics</div>
+    </div>
+    <div class="branch" onclick="showContent(5)">
+        <div class="sticky-note">Protective Measures</div>
+    </div>
+</div>
 
-<section>
-    <h2>Scam Statistics</h2>
-    <div class="chart">
-        <canvas id="peopleScammedChart"></canvas>
-    </div>
-    <div class="chart">
-        <canvas id="organizationsHackedChart"></canvas>
-    </div>
-</section>
+<div id="content-1" class="content">
+    <h2>Scamming is a pervasive issue...</h2>
+    <p>Scams affect individuals and organizations worldwide, leading to significant financial losses and emotional distress. Understanding scams and how to prevent them is crucial.</p>
+    <a href="javascript:void(0)" class="back-button" onclick="goBack()">Back</a>
+</div>
 
-<section>
-    <h2>Test Your Knowledge</h2>
-    <div class="quiz">
-        <p>Solve this puzzle: What is a common type of phishing scam?</p>
-        <input type="text" id="answer" placeholder="Your answer here">
-        <button onclick="checkAnswer()">Submit</button>
-        <p id="result"></p>
-    </div>
-</section>
+<div id="content-2" class="content">
+    <h2>Types of Scams and Scammers</h2>
+    <ul>
+        <li><strong>Phishing:</strong> Fraudulent communications, often via email, designed to steal sensitive information.</li>
+        <li><strong>Vishing:</strong> Voice-based scams targeting victims over the phone.</li>
+        <li><strong>Online Shopping Scams:</strong> Fake online stores that steal money without delivering products.</li>
+        <li><strong>Investment Scams:</strong> Schemes promising high returns with little risk, such as Ponzi schemes.</li>
+        <li><strong>Romance Scams:</strong> Scammers build fake online relationships to exploit victims emotionally and financially.</li>
+        <li><strong>Tech Support Scams:</strong> Fraudulent tech support companies claiming to fix issues while gaining access to personal devices.</li>
+    </ul>
+    <a href="javascript:void(0)" class="back-button" onclick="goBack()">Back</a>
+</div>
+
+<div id="content-3" class="content">
+    <h2>Profiles of Scammers</h2>
+    <ul>
+        <li><strong>Cybercriminals:</strong> Individuals or groups using technology to carry out scams, often operating across borders.</li>
+        <li><strong>Organized Crime Syndicates:</strong> Groups involved in large-scale fraud, often linked to other crimes.</li>
+        <li><strong>Insiders:</strong> Employees or contractors who exploit their access to commit fraud within organizations.</li>
+    </ul>
+    <a href="javascript:void(0)" class="back-button" onclick="goBack()">Back</a>
+</div>
+
+<div id="content-4" class="content">
+    <h2>Global Impact and Statistics</h2>
+    <p>Scams lead to billions in global losses each year. Some key statistics include:</p>
+    <ul>
+        <li><strong>Financial Losses:</strong> $1.02 trillion globally from August 2022 to August 2023.</li>
+        <li><strong>Consumer Reports:</strong> The FTC received 2.6 million fraud reports in 2023, with imposter scams being the most common.</li>
+        <li><strong>Cybercrime Complaints:</strong> The FBI received 880,418 complaints in 2023, a 10% increase from 2022.</li>
+        <li><strong>Global Fraud Losses:</strong> The cybercrime industry generates up to $4.5 trillion annually.</li>
+    </ul>
+    <a href="javascript:void(0)" class="back-button" onclick="goBack()">Back</a>
+</div>
+
+<div id="content-5" class="content">
+    <h2>Protective Measures</h2>
+    <ul>
+        <li><strong>Education:</strong> Stay informed about common scams and tactics.</li>
+        <li><strong>Verification:</strong> Always verify unsolicited communications before sharing information.</li>
+        <li><strong>Security Practices:</strong> Use strong passwords and enable multi-factor authentication.</li>
+        <li><strong>Reporting:</strong> Report scams to authorities to help prevent further fraud.</li>
+    </ul>
+    <a href="javascript:void(0)" class="back-button" onclick="goBack()">Back</a>
+</div>
+
+<!-- Chart container -->
+<div id="chart-container" style="display: block;">
+    <canvas id="scamChart"></canvas>
+</div>
 
 <footer>
-    Learn, Protect, and Stay Safe
+    <p>&copy; 2025 Cybersecurity Awareness</p>
 </footer>
 
 <script>
-    const ctx1 = document.getElementById('peopleScammedChart').getContext('2d');
-    const peopleScammedChart = new Chart(ctx1, {
+    // Function to show content based on branch click
+    function showContent(id) {
+        // Hide all content
+        const contents = document.querySelectorAll('.content');
+        contents.forEach(content => content.classList.remove('active-content'));
+
+        // Hide the chart
+        document.getElementById('chart-container').style.display = 'none';
+
+        // Show the selected content
+        document.getElementById('content-' + id).classList.add('active-content');
+        
+        // Hide the branches
+        const branches = document.querySelectorAll('.branch');
+        branches.forEach(branch => branch.style.display = 'none');
+    }
+
+    // Function to go back to the main page
+    function goBack() {
+        const contents = document.querySelectorAll('.content');
+        contents.forEach(content => content.classList.remove('active-content'));
+        
+        // Show branches again
+        const branches = document.querySelectorAll('.branch');
+        branches.forEach(branch => branch.style.display = 'inline-block');
+
+        // Show the chart
+        document.getElementById('chart-container').style.display = 'block';
+    }
+
+    // Chart.js code for the scam statistics chart
+    const ctx = document.getElementById('scamChart').getContext('2d');
+    const scamChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['Phishing', 'Vishing', 'Malware', 'Tech Support Scams'],
+            labels: ['Phishing', 'Vishing', 'Tech Support', 'Investment', 'Romance'],
             datasets: [{
-                label: '# of People Scammed',
-                data: [200, 150, 120, 90],
-                backgroundColor: 'rgba(54, 162, 235, 0.5)',
-                borderColor: 'rgba(54, 162, 235, 1)',
+                label: 'Scam Types 2024',
+                data: [100, 200, 50, 300, 150],
+                backgroundColor: ['#1e3a8a', '#00ff66', '#6a0dad', '#00bcd4', '#00d9ff'],
+                borderColor: ['#1e3a8a', '#00ff66', '#6a0dad', '#00bcd4', '#00d9ff'],
                 borderWidth: 1
             }]
         },
         options: {
             responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(tooltipItem) {
+                            return 'Value: ' + tooltipItem.raw;
+                        }
+                    }
                 }
             }
         }
     });
-
-    const ctx2 = document.getElementById('organizationsHackedChart').getContext('2d');
-    const organizationsHackedChart = new Chart(ctx2, {
-        type: 'pie',
-        data: {
-            labels: ['Government', 'Private Companies', 'Non-profits'],
-            datasets: [{
-                data: [40, 35, 25],
-                backgroundColor: ['#0077b6', '#00b4d8', '#90e0ef'],
-            }]
-        },
-        options: {
-            responsive: true
-        }
-    });
-
-    function checkAnswer() {
-        const answer = document.getElementById('answer').value.toLowerCase();
-        const result = document.getElementById('result');
-        if (answer === 'phishing') {
-            result.textContent = 'Correct! Phishing is a common scam.';
-            result.style.color = 'green';
-        } else {
-            result.textContent = 'Try again! Hint: It starts with "P".';
-            result.style.color = 'red';
-        }
-    }
 </script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </body>
 </html>
